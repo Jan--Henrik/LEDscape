@@ -8,6 +8,8 @@ It can support up to 48 connected strings and can drive them with very little lo
 
 This fork also supports SK6812 RGBW LED's.
 
+TBD: Support RGBW color orders, Fix processing sketches/add at least one example
+
 Background
 ------
 LEDscape was originally written by Trammell Hudson (http://trmm.net/Category:LEDscape) for
