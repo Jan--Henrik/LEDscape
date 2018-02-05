@@ -2,9 +2,11 @@ Overview
 ========
 LEDscape is a library and service for controlling individually addressable LEDs from a 
 Beagle Bone Black or Beagle Bone Green using the onboard [PRUs](http://processors.wiki.ti.com/index.php/Programmable_Realtime_Unit_Subsystem). It currently supports WS281x 
-(WS2811, WS2812, WS2812b), WS2801 and initial support for DMX. 
+(WS2811, WS2812, WS2812b), WS2801, SK6812 (RGBW) and initial support for DMX. 
 
 It can support up to 48 connected strings and can drive them with very little load on the main processor. 
+
+This fork also supports SK6812 RGBW LED's.
 
 Background
 ------
