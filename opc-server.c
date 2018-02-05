@@ -250,6 +250,7 @@ typedef struct {
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;
+	uint8_t w;
 } __attribute__((__packed__)) buffer_pixel_t;
 
 // Pixel Delta
@@ -257,10 +258,12 @@ typedef struct {
 	int8_t r;
 	int8_t g;
 	int8_t b;
+	int8_t w;
 
 	int8_t last_effect_frame_r;
 	int8_t last_effect_frame_g;
 	int8_t last_effect_frame_b;
+	int8_t last_effect_frame_w;
 } __attribute__((__packed__)) pixel_delta_t;
 
 
@@ -1456,16 +1459,19 @@ void* render_thread(void* unused_data)
 				int32_t interpolatedR;
 				int32_t interpolatedG;
 				int32_t interpolatedB;
+				int32_t interpolatedW;
 
 				// Interpolate
 				if (interpolation_enabled) {
 					interpolatedR = (pixel_in_prev->r*inv_frame_progress16 + pixel_in_current->r*frame_progress16) >> 8;
 					interpolatedG = (pixel_in_prev->g*inv_frame_progress16 + pixel_in_current->g*frame_progress16) >> 8;
 					interpolatedB = (pixel_in_prev->b*inv_frame_progress16 + pixel_in_current->b*frame_progress16) >> 8;
+					interpolatedW = (pixel_in_prev->w*inv_frame_progress16 + pixel_in_current->w*frame_progress16) >> 8;
 				} else {
 					interpolatedR = pixel_in_current->r << 8;
 					interpolatedG = pixel_in_current->g << 8;
 					interpolatedB = pixel_in_current->b << 8;
+					interpolatedW = pixel_in_current->w << 8;
 				}
 
 				// Apply LUT
@@ -1473,6 +1479,7 @@ void* render_thread(void* unused_data)
 					interpolatedR = lutInterpolate((uint32_t) interpolatedR, g_runtime_state.red_lookup);
 					interpolatedG = lutInterpolate((uint32_t) interpolatedG, g_runtime_state.green_lookup);
 					interpolatedB = lutInterpolate((uint32_t) interpolatedB, g_runtime_state.blue_lookup);
+					interpolatedW = lutInterpolate((uint32_t) interpolatedW, g_runtime_state.blue_lookup);
 				}
 
 				// Reset dithering for this pixel if it's been too long since it actually changed anything. This serves to prevent
@@ -1492,28 +1499,37 @@ void* render_thread(void* unused_data)
 					pixel_in_overflow->last_effect_frame_b = ditheringFrame;
 				}
 
+				if (abs(abs(pixel_in_overflow->last_effect_frame_w) - abs(ditheringFrame)) > maxDitherFrames) {
+					pixel_in_overflow->w = 0;
+					pixel_in_overflow->last_effect_frame_w = ditheringFrame;
+				}
+
 				// Apply dithering overflow
 				int32_t	ditheredR = interpolatedR;
 				int32_t	ditheredG = interpolatedG;
 				int32_t	ditheredB = interpolatedB;
+				int32_t	ditheredW = interpolatedW;
 
 				if (dithering_enabled) {
 					ditheredR += pixel_in_overflow->r;
 					ditheredG += pixel_in_overflow->g;
 					ditheredB += pixel_in_overflow->b;
+					ditheredW += pixel_in_overflow->w;
 				}
 
 				// Calculate and assign output values
 				uint8_t r = (uint8_t) min((ditheredR+0x80) >> 8, 255);
 				uint8_t g = (uint8_t) min((ditheredG+0x80) >> 8, 255);
 				uint8_t b = (uint8_t) min((ditheredB+0x80) >> 8, 255);
+				uint8_t w = (uint8_t) min((ditheredW+0x80) >> 8, 255);
 
 				ledscape_pixel_set_color(
 					pixel_out,
 					color_channel_order,
 					r,
 					g,
-					b
+					b,
+					w
 				);
 
 //				if (led_index == 0 && strip_index == 3) {
@@ -1524,6 +1540,7 @@ void* render_thread(void* unused_data)
 				if (r != (interpolatedR+0x80)>>8) pixel_in_overflow->last_effect_frame_r = ditheringFrame;
 				if (g != (interpolatedG+0x80)>>8) pixel_in_overflow->last_effect_frame_g = ditheringFrame;
 				if (b != (interpolatedB+0x80)>>8) pixel_in_overflow->last_effect_frame_b = ditheringFrame;
+				if (w != (interpolatedW+0x80)>>8) pixel_in_overflow->last_effect_frame_w = ditheringFrame;
 
 				// Recalculate Overflow
 				// NOTE: For some strange reason, reading the values from pixel_out causes strange memory corruption. As such
@@ -1533,6 +1550,7 @@ void* render_thread(void* unused_data)
 					pixel_in_overflow->r = (uint8_t) ((int16_t)ditheredR - (r * 257));
 					pixel_in_overflow->g = (uint8_t) ((int16_t)ditheredG - (g * 257));
 					pixel_in_overflow->b = (uint8_t) ((int16_t)ditheredB - (b * 257));
+					pixel_in_overflow->w = (uint8_t) ((int16_t)ditheredW - (w * 257));
 				}
 			}
 		}
@@ -1849,9 +1867,9 @@ void* e131_server_thread(void* unused_data)
 	int32_t last_seq_num = -1;
 
 	// Bind to multicast
-	if (join_multicast_group_on_all_ifaces(sock, "239.255.0.0") < 0) {
-		fprintf(stderr, "[e131] failed to bind to multicast addresses\n");
-	}
+	//if (join_multicast_group_on_all_ifaces(sock, "239.255.0.0") < 0) {
+	//	fprintf(stderr, "[e131] failed to bind to multicast addresses\n");
+	//}
 
 	uint8_t* dmx_buffer = NULL;
 	uint32_t dmx_buffer_size = 0;
