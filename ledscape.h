@@ -126,44 +126,36 @@ inline void ledscape_pixel_set_color(
 			out_pixel->a = r;
 			out_pixel->b = g;
 			out_pixel->c = b;
-                        out_pixel->d = w;
 		break;
 
 		case COLOR_ORDER_RBG:
 			out_pixel->a = r;
 			out_pixel->b = b;
 			out_pixel->c = g;
-                        out_pixel->d = w;
 		break;
 
 		case COLOR_ORDER_GRB:
 			out_pixel->a = g;
 			out_pixel->b = r;
 			out_pixel->c = b;
-                        out_pixel->d = w;
 		break;
 
 		case COLOR_ORDER_GBR:
 			out_pixel->a = g;
 			out_pixel->b = b;
 			out_pixel->c = r;
-                        out_pixel->d = w;
-
 		break;
 
 		case COLOR_ORDER_BGR:
 			out_pixel->a = b;
 			out_pixel->b = g;
 			out_pixel->c = r;
-                        out_pixel->d = w;
-
 		break;
 
 		case COLOR_ORDER_BRG:
 			out_pixel->a = b;
 			out_pixel->b = r;
 			out_pixel->c = g;
-                        out_pixel->d = w;
 		break;
 
 
@@ -193,7 +185,6 @@ inline void ledscape_pixel_set_color(
 			out_pixel->b = b;
 			out_pixel->c = w;
                         out_pixel->d = r;
-
 		break;
 
 		case COLOR_ORDER_BGRW:
@@ -201,7 +192,6 @@ inline void ledscape_pixel_set_color(
 			out_pixel->b = g;
 			out_pixel->c = w;
                         out_pixel->d = r;
-
 		break;
 
 		case COLOR_ORDER_BRGW:
@@ -238,7 +228,6 @@ inline void ledscape_pixel_set_color(
 			out_pixel->b = b;
 			out_pixel->c = w;
                         out_pixel->d = r;
-
 		break;
 
 		case COLOR_ORDER_BGWR:
@@ -246,7 +235,6 @@ inline void ledscape_pixel_set_color(
 			out_pixel->b = g;
 			out_pixel->c = w;
                         out_pixel->d = g;
-
 		break;
 
 		case COLOR_ORDER_BRWG:
@@ -283,7 +271,6 @@ inline void ledscape_pixel_set_color(
 			out_pixel->b = w;
 			out_pixel->c = b;
                         out_pixel->d = r;
-
 		break;
 
 		case COLOR_ORDER_BWGR:
@@ -291,7 +278,6 @@ inline void ledscape_pixel_set_color(
 			out_pixel->b = w;
 			out_pixel->c = g;
                         out_pixel->d = r;
-
 		break;
 
 		case COLOR_ORDER_BWRG:
@@ -327,7 +313,6 @@ inline void ledscape_pixel_set_color(
 			out_pixel->b = g;
 			out_pixel->c = b;
                         out_pixel->d = r;
-
 		break;
 
 		case COLOR_ORDER_WBGR:
