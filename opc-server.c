@@ -137,7 +137,7 @@ const char* demo_mode_to_string(demo_mode_t mode) {
 		case DEMO_MODE_FADE: return "fade";
 		case DEMO_MODE_IDENTIFY: return "id";
 		case DEMO_MODE_BLACK: return "black";
-		case DEMO_MODE_POWER: return "power";        
+		case DEMO_MODE_POWER: return "power";
 		default: return "<invalid demo_mode>";
 	}
 }
@@ -153,7 +153,7 @@ demo_mode_t demo_mode_from_string(const char* str) {
 		return DEMO_MODE_BLACK;
 	} else if (strcasecmp(str, "power") == 0) {
     	return DEMO_MODE_POWER;
-	} else {        
+	} else {
 		return -1;
 	}
 }
@@ -1337,34 +1337,33 @@ void* render_thread(void* unused_data)
 			usleep(1e6 /* 1s */);
 			continue;
 		}
-        
+
         bool interpolation_enabled = g_server_config.interpolation_enabled;
-        
+
         // If interpolation not enabled, then we only care about the current frame and want to fully display it immediately
-                
+
         if (!interpolation_enabled) {
-            
-            if (g_runtime_state.has_next_frame) {        
-                
+
+            if (g_runtime_state.has_next_frame) {
+
                 // Make the next frame the current frame
                 rotate_frames(FALSE);
             }
-            
+
             if (!g_runtime_state.has_current_frame) {
                 pthread_mutex_unlock(&g_runtime_state.mutex);
                 usleep(10e3 /* 10ms */);
                 continue;
             }
-            
         } else {
-            
+
             // Skip frames if there isn't enough data
             if (!g_runtime_state.has_prev_frame || !g_runtime_state.has_current_frame) {
                 pthread_mutex_unlock(&g_runtime_state.mutex);
                 usleep(10e3 /* 10ms */);
                 continue;
             }
-            
+
             // Calculate the time delta and current percentage (as a 16-bit value)
             gettimeofday(&now_tv, NULL);
             timersub(&now_tv, &g_runtime_state.next_frame_tv, &frame_progress_tv);
@@ -1402,8 +1401,7 @@ void* render_thread(void* unused_data)
                 usleep(100e3 /* 100ms */);
                 continue;
             }
-            
-        }   
+        }
 
 		// printf("%d of %d (%d)\n",
 		// 	(frame_progress_tv.tv_sec*1000000 + frame_progress_tv.tv_usec) ,
@@ -1438,7 +1436,7 @@ void* render_thread(void* unused_data)
 
 		// Only enable dithering if we're better than 100fps
 		bool dithering_enabled = (frame_duration_avg_usec < 10000) && g_server_config.dithering_enabled;
-		
+
 		bool lut_enabled = g_server_config.lut_enabled;
 
 		color_channel_order_t color_channel_order = g_server_config.color_channel_order;
@@ -1755,11 +1753,11 @@ void* demo_thread(void* unused_data)
 						case DEMO_MODE_BLACK: {
 							buffer[data_index] = buffer[data_index+1] = buffer[data_index+2] = 0;
 						} break;
-                        
+
 						case DEMO_MODE_POWER: {
     						buffer[data_index] = buffer[data_index+1] = buffer[data_index+2] = 0xff;
 						} break;
-                        
+
 					}
 				}
 			}
