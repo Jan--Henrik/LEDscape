@@ -62,7 +62,31 @@ typedef enum {
 	COLOR_ORDER_GRB,
 	COLOR_ORDER_GBR,
 	COLOR_ORDER_BGR,
-	COLOR_ORDER_BRG // Old LEDscape default
+	COLOR_ORDER_BRG,
+	COLOR_ORDER_RGBW,
+	COLOR_ORDER_RBGW,
+	COLOR_ORDER_GRBW,
+	COLOR_ORDER_GBRW,
+	COLOR_ORDER_BGRW,
+	COLOR_ORDER_BRGW,
+	COLOR_ORDER_RGWB,
+	COLOR_ORDER_RBWG,
+	COLOR_ORDER_GRWB,
+	COLOR_ORDER_GBWR,
+	COLOR_ORDER_BGWR,
+	COLOR_ORDER_BRWG,
+	COLOR_ORDER_RWGB,
+	COLOR_ORDER_RWBG,
+	COLOR_ORDER_GWRB,
+	COLOR_ORDER_GWBR,
+	COLOR_ORDER_BWGR,
+	COLOR_ORDER_BWRG,
+	COLOR_ORDER_WRGB,
+	COLOR_ORDER_WRBG,
+	COLOR_ORDER_WGRB,
+	COLOR_ORDER_WGBR,
+	COLOR_ORDER_WBGR,
+	COLOR_ORDER_WBRG
 } color_channel_order_t;
 
 
@@ -141,6 +165,186 @@ inline void ledscape_pixel_set_color(
 			out_pixel->c = g;
                         out_pixel->d = w;
 		break;
+
+
+		case COLOR_ORDER_RGBW:
+			out_pixel->a = r;
+			out_pixel->b = g;
+			out_pixel->c = w;
+                        out_pixel->d = b;
+		break;
+
+		case COLOR_ORDER_RBGW:
+			out_pixel->a = r;
+			out_pixel->b = b;
+			out_pixel->c = w;
+                        out_pixel->d = g;
+		break;
+
+		case COLOR_ORDER_GRBW:
+			out_pixel->a = g;
+			out_pixel->b = r;
+			out_pixel->c = w;
+                        out_pixel->d = b;
+		break;
+
+		case COLOR_ORDER_GBRW:
+			out_pixel->a = g;
+			out_pixel->b = b;
+			out_pixel->c = w;
+                        out_pixel->d = r;
+
+		break;
+
+		case COLOR_ORDER_BGRW:
+			out_pixel->a = b;
+			out_pixel->b = g;
+			out_pixel->c = w;
+                        out_pixel->d = r;
+
+		break;
+
+		case COLOR_ORDER_BRGW:
+			out_pixel->a = b;
+			out_pixel->b = r;
+			out_pixel->c = w;
+                        out_pixel->d = g;
+		break;
+
+
+		case COLOR_ORDER_RGWB:
+			out_pixel->a = r;
+			out_pixel->b = g;
+			out_pixel->c = w;
+                        out_pixel->d = b;
+		break;
+
+		case COLOR_ORDER_RBWG:
+			out_pixel->a = r;
+			out_pixel->b = b;
+			out_pixel->c = w;
+                        out_pixel->d = g;
+		break;
+
+		case COLOR_ORDER_GRWB:
+			out_pixel->a = g;
+			out_pixel->b = r;
+			out_pixel->c = w;
+                        out_pixel->d = b;
+		break;
+
+		case COLOR_ORDER_GBWR:
+			out_pixel->a = g;
+			out_pixel->b = b;
+			out_pixel->c = w;
+                        out_pixel->d = r;
+
+		break;
+
+		case COLOR_ORDER_BGWR:
+			out_pixel->a = b;
+			out_pixel->b = g;
+			out_pixel->c = w;
+                        out_pixel->d = g;
+
+		break;
+
+		case COLOR_ORDER_BRWG:
+			out_pixel->a = b;
+			out_pixel->b = r;
+			out_pixel->c = w;
+                        out_pixel->d = g;
+		break;
+
+
+		case COLOR_ORDER_RWGB:
+			out_pixel->a = r;
+			out_pixel->b = w;
+			out_pixel->c = g;
+                        out_pixel->d = b;
+		break;
+
+		case COLOR_ORDER_RWBG:
+			out_pixel->a = r;
+			out_pixel->b = w;
+			out_pixel->c = b;
+                        out_pixel->d = g;
+		break;
+
+		case COLOR_ORDER_GWRB:
+			out_pixel->a = g;
+			out_pixel->b = w;
+			out_pixel->c = r;
+                        out_pixel->d = b;
+		break;
+
+		case COLOR_ORDER_GWBR:
+			out_pixel->a = g;
+			out_pixel->b = w;
+			out_pixel->c = b;
+                        out_pixel->d = r;
+
+		break;
+
+		case COLOR_ORDER_BWGR:
+			out_pixel->a = b;
+			out_pixel->b = w;
+			out_pixel->c = g;
+                        out_pixel->d = r;
+
+		break;
+
+		case COLOR_ORDER_BWRG:
+			out_pixel->a = b;
+			out_pixel->b = w;
+			out_pixel->c = r;
+                        out_pixel->d = g;
+		break;
+
+		case COLOR_ORDER_WRGB:
+			out_pixel->a = w;
+			out_pixel->b = r;
+			out_pixel->c = g;
+                        out_pixel->d = b;
+		break;
+
+		case COLOR_ORDER_WRBG:
+			out_pixel->a = w;
+			out_pixel->b = r;
+			out_pixel->c = b;
+                        out_pixel->d = g;
+		break;
+
+		case COLOR_ORDER_WGRB:
+			out_pixel->a = w;
+			out_pixel->b = g;
+			out_pixel->c = r;
+                        out_pixel->d = b;
+		break;
+
+		case COLOR_ORDER_WGBR:
+			out_pixel->a = w;
+			out_pixel->b = g;
+			out_pixel->c = b;
+                        out_pixel->d = r;
+
+		break;
+
+		case COLOR_ORDER_WBGR:
+			out_pixel->a = w;
+			out_pixel->b = b;
+			out_pixel->c = g;
+                        out_pixel->d = r;
+
+		break;
+
+		case COLOR_ORDER_WBRG:
+			out_pixel->a = w;
+			out_pixel->b = b;
+			out_pixel->c = r;
+                        out_pixel->d = g;
+		break;
+
 	}
 }
 

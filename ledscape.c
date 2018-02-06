@@ -213,6 +213,35 @@ const char* color_channel_order_to_string(color_channel_order_t color_channel_or
 		case COLOR_ORDER_GBR: return "GBR";
 		case COLOR_ORDER_BGR: return "BGR";
 		case COLOR_ORDER_BRG: return "BRG";
+
+		case COLOR_ORDER_RGBW: return "RGB";
+		case COLOR_ORDER_RBGW: return "RBG";
+		case COLOR_ORDER_GRBW: return "GRB";
+		case COLOR_ORDER_GBRW: return "GBR";
+		case COLOR_ORDER_BGRW: return "BGR";
+		case COLOR_ORDER_BRGW: return "BRG";
+
+		case COLOR_ORDER_RGWB: return "RGWB";
+		case COLOR_ORDER_RBWG: return "RBWG";
+		case COLOR_ORDER_GRWB: return "GRWB";
+		case COLOR_ORDER_GBWR: return "GBWR";
+		case COLOR_ORDER_BGWR: return "BGWR";
+		case COLOR_ORDER_BRWG: return "BRWG";
+
+		case COLOR_ORDER_RWGB: return "RWGB";
+		case COLOR_ORDER_RWBG: return "RWBG";
+		case COLOR_ORDER_GWRB: return "GWRB";
+		case COLOR_ORDER_GWBR: return "GWBR";
+		case COLOR_ORDER_BWGR: return "BWGR";
+		case COLOR_ORDER_BWRG: return "BWRG";
+
+		case COLOR_ORDER_WRGB: return "WRGB";
+		case COLOR_ORDER_WRBG: return "WRBG";
+		case COLOR_ORDER_WGRB: return "WGRB";
+		case COLOR_ORDER_WGBR: return "WGBR";
+		case COLOR_ORDER_WBGR: return "WBGR";
+		case COLOR_ORDER_WBRG: return "WBRG";
+
 		default: return  "<invalid color_channel_order>";
 	}
 }
@@ -235,6 +264,82 @@ color_channel_order_t color_channel_order_from_string(const char* str) {
 	}
 	else if (strcasecmp(str, "BRG") == 0) {
 		return COLOR_ORDER_BRG;
+	}
+
+	else if (strcasecmp(str, "RGBW") == 0) {
+		return COLOR_ORDER_RGBW;
+	}
+	else if (strcasecmp(str, "RBGW") == 0) {
+		return COLOR_ORDER_RBGW;
+	}
+	else if (strcasecmp(str, "GRBW") == 0) {
+		return COLOR_ORDER_GRBW;
+	}
+	else if (strcasecmp(str, "GBRW") == 0) {
+		return COLOR_ORDER_GBRW;
+	}
+	else if (strcasecmp(str, "BGRW") == 0) {
+		return COLOR_ORDER_BGRW;
+	}
+	else if (strcasecmp(str, "BRGW") == 0) {
+		return COLOR_ORDER_BRGW;
+	}
+
+	else if (strcasecmp(str, "RGWB") == 0) {
+		return COLOR_ORDER_RGWB;
+	}
+	else if (strcasecmp(str, "RBWG") == 0) {
+		return COLOR_ORDER_RBWG;
+	}
+	else if (strcasecmp(str, "GRWB") == 0) {
+		return COLOR_ORDER_GRWB;
+	}
+	else if (strcasecmp(str, "GBWR") == 0) {
+		return COLOR_ORDER_GBWR;
+	}
+	else if (strcasecmp(str, "BGWR") == 0) {
+		return COLOR_ORDER_BGWR;
+	}
+	else if (strcasecmp(str, "BRWG") == 0) {
+		return COLOR_ORDER_BRWG;
+	}
+
+	else if (strcasecmp(str, "RWGB") == 0) {
+		return COLOR_ORDER_RWGB;
+	}
+	else if (strcasecmp(str, "RWBG") == 0) {
+		return COLOR_ORDER_RWBG;
+	}
+	else if (strcasecmp(str, "GWRB") == 0) {
+		return COLOR_ORDER_GWRB;
+	}
+	else if (strcasecmp(str, "GWBR") == 0) {
+		return COLOR_ORDER_GWBR;
+	}
+	else if (strcasecmp(str, "BWGR") == 0) {
+		return COLOR_ORDER_BWGR;
+	}
+	else if (strcasecmp(str, "BWRG") == 0) {
+		return COLOR_ORDER_BWRG;
+	}
+
+	else if (strcasecmp(str, "WRGB") == 0) {
+		return COLOR_ORDER_WRGB;
+	}
+	else if (strcasecmp(str, "WRBG") == 0) {
+		return COLOR_ORDER_WRBG;
+	}
+	else if (strcasecmp(str, "WGRB") == 0) {
+		return COLOR_ORDER_WGRB;
+	}
+	else if (strcasecmp(str, "WGBR") == 0) {
+		return COLOR_ORDER_WGBR;
+	}
+	else if (strcasecmp(str, "WBGR") == 0) {
+		return COLOR_ORDER_WBGR;
+	}
+	else if (strcasecmp(str, "WBRG") == 0) {
+		return COLOR_ORDER_WBRG;
 	}
 	else {
 		return -1;

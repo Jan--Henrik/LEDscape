@@ -62,7 +62,7 @@ typedef enum {
 	DEMO_MODE_FADE = 1,
 	DEMO_MODE_IDENTIFY = 2,
 	DEMO_MODE_BLACK = 3,
-    DEMO_MODE_POWER = 4
+    	DEMO_MODE_POWER = 4
 } demo_mode_t;
 
 typedef struct {
@@ -235,7 +235,7 @@ server_config_t g_server_config = {
 
 	.leds_per_strip = 176,
 	.used_strip_count = LEDSCAPE_NUM_STRIPS,
-	.color_channel_order = COLOR_ORDER_BRG,
+	.color_channel_order = COLOR_ORDER_BRGW,
 
 	.interpolation_enabled = TRUE,
 	.dithering_enabled = TRUE,
