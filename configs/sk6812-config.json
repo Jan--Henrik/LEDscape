@@ -4,7 +4,7 @@
 	"demoMode": "fade",
 	"ledsPerStrip": 600,
         "usedStripCount": 48,
-	"colorChannelOrder": "BRG",
+	"colorChannelOrder": "WBRG",
 	"opcTcpPort": 7890,
 	"opcUdpPort": 7890,
 	"enableInterpolation": false,
